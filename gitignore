@@ -1,0 +1,14 @@
+# Ignore Python cache files
+__pycache__/
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore Jupyter notebook checkpoints
+*.ipynb_checkpoints
+
+# Ignore model weights and large generated files
+*.pth
+generated_spectrograms/
+generated_audio/
