@@ -1,4 +1,4 @@
-# 🎶 Deep Music GAN
+# 🎶 Deep Generation of Electronic Music
 
 This project uses a **DCGAN** (Deep Convolutional GAN) to generate spectrograms from audio data and reconstruct them back into sound.
 
