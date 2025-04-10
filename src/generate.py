@@ -2,16 +2,12 @@ import torch
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-from model import Generator
-
-# Hyperparameters
-LATENT_DIM = 100
-IMG_SHAPE = (128, 128)
+from model import Generator, nz, nc, ngf, ngpu
 
 # Load trained generator
 def load_generator(model_path):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    generator = Generator(latent_dim=LATENT_DIM, output_shape=IMG_SHAPE).to(device)
+    generator = Generator(ngpu).to(device)
     generator.load_state_dict(torch.load(model_path, map_location=device))
     generator.eval()
     return generator
@@ -22,7 +18,7 @@ def generate_spectrograms(generator, num_samples=10, output_dir="generated_spect
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     with torch.no_grad():
-        z = torch.randn(num_samples, LATENT_DIM, device=device)
+        z = torch.randn(num_samples, nz, device=device)
         gen_imgs = generator(z).cpu().numpy().squeeze()
 
         for i, img in enumerate(gen_imgs):
